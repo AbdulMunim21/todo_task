@@ -1,4 +1,5 @@
 const Task = require("../models/taskModel");
+
 exports.addTask = async (req, res, next) => {
   try {
     const task = req.body;
@@ -14,6 +15,7 @@ exports.addTask = async (req, res, next) => {
       message: true,
     });
   } catch (e) {
+    console.log(e)
     res.json({
       message: false,
     });
@@ -51,9 +53,11 @@ exports.markTaskComplete = async (req, res, next) => {
   const id = req.body.id;
   const task = await Task.findById(id);
   if (!task.completed) {
-    Task.findByIdAndUpdate(id, {
-      completed: !task.completed,
-      completedTime: new Date(),
+    await Task.findByIdAndUpdate(id, {
+      $set: {
+        completed: true,
+        completedTime: new Date(),
+      },
     });
     res.json({
       message: true,
