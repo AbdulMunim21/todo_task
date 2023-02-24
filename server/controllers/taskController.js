@@ -6,16 +6,17 @@ exports.addTask = async (req, res, next) => {
     const taskModel = new Task({
       task: task.task,
       completed: false,
-      completedTime: new Date(),
-      creationTime: new Date(),
+      completedTime: task.completedTime,
+      creationTime: task.creationTime,
     });
 
-    await taskModel.save();
+    const data = await taskModel.save();
     res.json({
       message: true,
+      id:data._id
     });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.json({
       message: false,
     });
@@ -25,6 +26,7 @@ exports.addTask = async (req, res, next) => {
 exports.getTasks = async (req, res, next) => {
   try {
     const allTasks = await Task.find({});
+    // console.log(allTasks);
     res.json({
       tasks: allTasks,
       message: true,
