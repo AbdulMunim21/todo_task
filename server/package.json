@@ -1,0 +1,23 @@
+{
+  "name": "todo-task-server",
+  "version": "1.0.0",
+  "description": "TodoTask by Abdul Munim",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "author": "Abdul Munim",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^6.10.0"
+  }
+}

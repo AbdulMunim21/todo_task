@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const myFunction = () => {
+    console.log("pressed Enter ✅");
+  };
+
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      console.log("User pressed: ", event.key);
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        myFunction();
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
+  return <div className="App"></div>;
 }
 
 export default App;

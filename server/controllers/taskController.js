@@ -1,0 +1,66 @@
+const Task = require("../models/taskModel");
+exports.addTask = async (req, res, next) => {
+  try {
+    const task = req.body;
+    const taskModel = new Task({
+      task: task.task,
+      completed: false,
+      completedTime: new Date(),
+      creationTime: new Date(),
+    });
+
+    await taskModel.save();
+    res.json({
+      message: true,
+    });
+  } catch (e) {
+    res.json({
+      message: false,
+    });
+  }
+};
+
+exports.getTasks = async (req, res, next) => {
+  try {
+    const allTasks = await Task.find({});
+    res.json({
+      tasks: allTasks,
+      message: true,
+    });
+  } catch (e) {
+    res.json({
+      message: false,
+    });
+  }
+};
+exports.deleteTask = async (req, res, next) => {
+  try {
+    const id = req.body.id;
+    await Task.deleteOne({ _id: id });
+    res.json({
+      message: true,
+    });
+  } catch (error) {
+    res.json({
+      message: false,
+    });
+  }
+};
+
+exports.markTaskComplete = async (req, res, next) => {
+  const id = req.body.id;
+  const task = await Task.findById(id);
+  if (!task.completed) {
+    Task.findByIdAndUpdate(id, {
+      completed: !task.completed,
+      completedTime: new Date(),
+    });
+    res.json({
+      message: true,
+    });
+  } else {
+    res.json({
+      message: false,
+    });
+  }
+};
