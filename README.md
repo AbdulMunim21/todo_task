@@ -13,8 +13,8 @@ Requirements:
     - ~~Completed time~~
     - ~~Creation time~~
 7. ~~Integrate frontend and backend part~~
-8. Add the Delete button in the right-hand menu(dots) button to delete the task
-9. Desiging same as Mockup
+8. ~~Add the Delete button in the right-hand menu(dots) button to delete the task~~
+9. ~~Desiging same as Mockup~~
 10. Unit Testing
 11. Functional Testing
 12. Dockerize App

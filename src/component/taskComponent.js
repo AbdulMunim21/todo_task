@@ -1,7 +1,8 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai";
 import { FiMoreVertical } from "react-icons/fi";
+import { AiFillDelete } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
+// import MenuComponent from './menuComponent'
 const TaskComponent = (props) => {
   return (
     <div style={props.styling}>
@@ -10,18 +11,21 @@ const TaskComponent = (props) => {
           style={{
             display: "flex",
             padding: "20px",
-            width: "10%",
+            width: "60px",
             height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <TiTick
             style={{
               ...styles.iconStyle,
               backgroundColor: "grey",
-              borderRadius: "40%",
+              borderRadius: "50%",
               color: "white",
             }}
             onClick={props.onComplete}
+            size={10}
           />
         </div>
       ) : (
@@ -29,8 +33,10 @@ const TaskComponent = (props) => {
           style={{
             display: "flex",
             padding: "20px",
-            width: "10%",
+            width: "60px",
             height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <div
@@ -41,15 +47,24 @@ const TaskComponent = (props) => {
       )}
 
       <div style={styles.taskStyle}>{props.taskStr}</div>
-      <div
-        style={{
-          display: "flex",
-          padding: "20px",
-          width: "10%",
-          height: "100%",
-        }}
-      >
-        <FiMoreVertical style={styles.iconStyle} onClick={props.onDelete} />
+
+      <div class="dropdown">
+        <FiMoreVertical
+          style={{ ...styles.iconStyle, padding: "16px", boxShadow: "none" }}
+        />
+        <div class="dropdown-content">
+          {/* <h6 style={{ fontSize: "20px" }}> Delete</h6> */}
+          <AiFillDelete
+            onClick={props.onDelete}
+            style={{
+              ...styles.iconStyle,
+              color: "red",
+
+              boxShadow: "none",
+            }}
+            size={10}
+          />
+        </div>
       </div>
     </div>
   );
@@ -64,28 +79,30 @@ const styles = {
     marginLeft: "10px",
     width: "80%",
     height: "100%",
-    fontSize: "40px",
+    fontSize: "20px",
     padding: "20px",
     color: "black",
   },
   iconStyle: {
     display: "flex",
-    width: "100%",
-    height: "100%",
-    fontSize: "20px",
+    width: "50%",
+    height: "50%",
+    // fontSize: "20px",
     color: "black",
     cursor: "pointer",
+    boxShadow:
+      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset",
   },
   notCompletedIconStyle: {
     display: "flex",
-    width: "10%",
-    height: "100%",
+    width: "50%",
+    height: "50%",
     color: "black",
     cursor: "pointer",
-    borderWidth: "3px",
+    borderWidth: "1px",
     borderColor: "black",
     borderStyle: "solid",
-    borderRadius: "40%",
+    borderRadius: "50%",
   },
 };
 

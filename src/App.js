@@ -5,6 +5,8 @@ import humanPic from "./images/human.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+import './App.css'
+
 import TaskComponent from "./component/taskComponent";
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, []); 
 
   const getTasks = async () => {
     const response = await axios.get("http://localhost:5000/getTasks", {
@@ -213,8 +215,7 @@ const styles = {
     backgroundColor: "transparent",
     border: "none",
     outline: "none",
-    fontSize: "30px",
-    placeholderColor: "red",
+    fontSize: "23px",
     color: "white",
   },
   taskListDiv: {
@@ -226,6 +227,7 @@ const styles = {
     alignItems: "center",
     marginTop: "20px",
     overflowY: "auto",
+    scrollY:'auto'
   },
   taskDivStyle: {
     display: "flex",
