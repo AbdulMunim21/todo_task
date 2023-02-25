@@ -17,4 +17,11 @@ Requirements:
 9. ~~Desiging same as Mockup~~
 10. Unit Testing
 11. Functional Testing
-12. Dockerize App
+12. ~~Dockerize App~~
+
+
+RUN Instructions
+1. open 2 terminals (one for frontend and other for backend)
+2. write command npm start to run the frontend part
+3. go to server folder by writing cd ./server on other terminal
+4. write npm start to run the server

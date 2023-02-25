@@ -1,11 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import bgPic from "./images/background_img.png";
 import humanPic from "./images/human.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import './App.css'
+import * as apiServices from "./api/apiFile";
+
+import "./App.css";
 
 import TaskComponent from "./component/taskComponent";
 
@@ -16,30 +17,17 @@ function App() {
 
   useEffect(() => {
     getTasks();
-  }, []); 
+  }, []);
 
   const getTasks = async () => {
-    const response = await axios.get("http://localhost:5000/getTasks", {
-      withCredentials: true,
-    });
-
-    console.log(response.data.tasks);
+    const response = await apiServices.getTasks();
     if (response.data.message) {
       setTaskList(response.data.tasks);
     }
   };
 
   const addTask = async () => {
-    const time = new Date();
-    const response = await axios.post(
-      "http://localhost:5000/addTask",
-      {
-        task: taskInput,
-        creationTime: time,
-        completedTime: time,
-      },
-      { withCredentials: true }
-    );
+    const { response, time } = await apiServices.addTask(taskInput);
     if (response.data.message) {
       setTaskList([
         ...tasksList,
@@ -56,24 +44,14 @@ function App() {
   };
 
   const deleteTask = async (deletedTask) => {
-    await axios.post(
-      "http://localhost:5000/deleteTask",
-      { id: deletedTask._id },
-      { withCredentials: true }
-    );
-
+    apiServices.deleteTask(deletedTask);
     setTaskList((taskList) =>
       taskList.filter((task) => task._id !== deletedTask._id)
     );
   };
 
   const markTaskComplete = async (markedTask) => {
-    await axios.post(
-      "http://localhost:5000/markTaskComplete",
-      { id: markedTask._id },
-      { withCredentials: true }
-    );
-
+    apiServices.markTaskComplete(markedTask);
     setTaskList((taskList) =>
       taskList.map((task) => {
         if (task._id === markedTask._id) {
@@ -227,7 +205,7 @@ const styles = {
     alignItems: "center",
     marginTop: "20px",
     overflowY: "auto",
-    scrollY:'auto'
+    scrollY: "auto",
   },
   taskDivStyle: {
     display: "flex",
